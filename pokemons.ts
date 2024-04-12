@@ -4,12 +4,12 @@ import { constants } from "bun:sqlite";
 
 
 export class Pokemon {
-  constructor(public name: string, public url: string) {}
+  constructor(public name: string, public photo: string) {}
 }
 
 export class PokemonDetail extends Pokemon {
-  constructor(public name: string, public url: string, public height: string) {
-    super(name, url);
+  constructor(public name: string, public photo: string, public height: string) {
+    super(name, photo);
     this.height = height;
   }
 }
@@ -18,6 +18,7 @@ class DataPokemon {
 name! : string;
 height! : number;
 weight! : number;
+sprites! : any;
 
 getHeight() {
 return this.height
@@ -26,6 +27,10 @@ return this.height
 
 getWeight() {
   return this.height;
+}
+
+getPhoto() {
+  return this.sprites["front_default"];
 }
 }
 
@@ -48,7 +53,7 @@ console.log("height", test.getHeight());
 
 //console.log("ABILITIES", JSON.stringify(details));
 
-    pokemons.push(new Pokemon(name, url));
+    pokemons.push(new Pokemon(name, test.getPhoto()));
 
   }
   return pokemons;

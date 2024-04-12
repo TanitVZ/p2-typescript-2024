@@ -6,7 +6,7 @@ const renderPokemons = (pokemons : Array<Pokemon>) => {
     for (const pokemon of pokemons) {
         
         html +=`<div>${pokemon.name}</div>`;
-        html +=`<div>${pokemon.url}</div>`;
+        html +=`<div><img src="${pokemon.photo}" title="Photo of ${pokemon.name}"</div>`;
     }
    html += `</body></html>`;
     return html;
