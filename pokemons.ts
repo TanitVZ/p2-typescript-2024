@@ -1,60 +1,73 @@
 import { constants } from "bun:sqlite";
 
-
-
+type TypePok = {
+  slot: number;
+  type: string[];
+};
 
 export class Pokemon {
-  constructor(public name: string, public photo: string) {}
+  constructor(public name: string, public photo: string, public typePok: any) {}
 }
 
 export class PokemonDetail extends Pokemon {
-  constructor(public name: string, public photo: string, public height: string) {
-    super(name, photo);
+  constructor(
+    public name: string,
+    public photo: string,
+    public typePok: any,
+    public height: number,
+    public weight: number
+  ) {
+    super(name, photo, typePok);
     this.height = height;
+    this.weight = weight;
   }
 }
 
 class DataPokemon {
-name! : string;
-height! : number;
-weight! : number;
-sprites! : any;
+  name!: string;
+  height!: number;
+  weight!: number;
+  sprites!: any;
+  types!: any;
 
-getHeight() {
-return this.height
+  getHeight() {
+    return this.height;
+  }
 
-}
+  getWeight() {
+    return this.height;
+  }
 
-getWeight() {
-  return this.height;
-}
+  getPhoto() {
+    return this.sprites["front_default"];
+  }
 
-getPhoto() {
-  return this.sprites["front_default"];
-}
+  getTypes() {
+    let a = [];
+    for (const t of this.types) {
+      a.push(t["type"]["name"]);
+    }
+
+    return a;
+  }
 }
 
 export const loadPokemons = async (n: number) => {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${n}`);  
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${n}`);
   const { results } = (await response.json()) as { results: any[] };
-//console.log("results", results);
-
-
- 
+  //console.log("results", results);
 
   const pokemons: Array<Pokemon> = [];
   for (const { name, url } of results) {
     //console.log(url);
- 
- const responseDetail = await fetch(`${url}`);
-const details  = (await responseDetail.json() as any[]);
-const test = Object.assign(new DataPokemon(), details);
-console.log("height", test.getHeight());
 
-//console.log("ABILITIES", JSON.stringify(details));
+    const responseDetail = await fetch(`${url}`);
+    const details = (await responseDetail.json()) as any[];
+    const pok = Object.assign(new DataPokemon(), details);
 
-    pokemons.push(new Pokemon(name, test.getPhoto()));
+    //console.log("ABILITIES", JSON.stringify(details));
 
+    pokemons.push(new Pokemon(name, pok.getPhoto(), pok.getTypes()));
   }
   return pokemons;
 };
