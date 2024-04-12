@@ -15,7 +15,9 @@ export class PokemonDetail extends Pokemon {
     public photo: string,
     public typePok: any,
     public height: number,
-    public weight: number
+    public weight: number,
+    public abilities: any,
+    public moves: any
   ) {
     super(name, photo, typePok);
     this.height = height;
@@ -29,13 +31,15 @@ class DataPokemon {
   weight!: number;
   sprites!: any;
   types!: any;
+  abilities!: any;
+  moves!: any;
 
   getHeight() {
     return this.height;
   }
 
   getWeight() {
-    return this.height;
+    return this.weight;
   }
 
   getPhoto() {
@@ -50,6 +54,24 @@ class DataPokemon {
 
     return a;
   }
+
+  getAbilities() {
+    let a = [];
+    for (const t of this.abilities) {
+      a.push(t["ability"]["name"]);
+    }
+
+    return a;
+  }
+
+  getMoves() {
+    let a = [];
+    for (const t of this.moves) {
+      a.push(t["move"]["name"]);
+    }
+
+    return a;
+  }
 }
 
 export const loadPokemons = async (n: number) => {
@@ -57,7 +79,7 @@ export const loadPokemons = async (n: number) => {
   const { results } = (await response.json()) as { results: any[] };
   //console.log("results", results);
 
-  const pokemons: Array<Pokemon> = [];
+  const pokemons: Array<PokemonDetail> = [];
   for (const { name, url } of results) {
     //console.log(url);
 
@@ -67,7 +89,17 @@ export const loadPokemons = async (n: number) => {
 
     //console.log("ABILITIES", JSON.stringify(details));
 
-    pokemons.push(new Pokemon(name, pok.getPhoto(), pok.getTypes()));
+    pokemons.push(
+      new PokemonDetail(
+        name,
+        pok.getPhoto(),
+        pok.getTypes(),
+        pok.getHeight(),
+        pok.getWeight(),
+        pok.getAbilities(),
+        pok.getMoves()
+      )
+    );
   }
   return pokemons;
 };
