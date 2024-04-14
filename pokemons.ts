@@ -22,7 +22,7 @@ export class PokemonDetail extends Pokemon {
     public moves: any,
     public habitat: string,
     public eggs: any,
-    public evolvesFrom: any,
+    public evolvesFrom: string,
     public varieties: VarietyPokemon[]
   ) {
     super(name, photo, typePok);
@@ -105,6 +105,8 @@ class SpeciesPokemon {
     for (const e of this.egg_groups) {
       a.push(e["name"]);
     }
+
+    return a;
   }
 
   getEvolvesFrom() {
@@ -118,7 +120,7 @@ class SpeciesPokemon {
 
   getVarieties() {
     let variety: VarietyPokemon[] = [];
-    console.log("POKEMON", this.name);
+   
     for (const v of this.varieties) {
       let a: VarietyPokemon = {};
       a.name = v.pokemon["name"];   

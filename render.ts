@@ -39,7 +39,9 @@ const renderPokemonDetail = (pokemon: PokemonDetail) => {
   html += `<div class="label">Habitat:</div><div class="field">${pokemon.habitat}</div>`;
   html += `${addVarieties(
     pokemon.varieties
-  )}</div>`;
+  )}`;
+  html += `${addEvolvesFrom(pokemon.evolvesFrom)}`;
+  html += `<div class="label">Eggs:</div><div class="field">${pokemon.eggs.join(", ")}</div>`;
   html += `<div class="label">Moves:</div><div class="field">${addMoves(
     pokemon.moves
   )}</div>`;
@@ -57,7 +59,14 @@ const htmlHead = (title: string) => {
   head += `<title>${title}</title>`;
   return head;
 };
-
+const addEvolvesFrom = (evolves : string) => {
+  let strHtml = "";
+  console.log(evolves);
+  if (evolves !== "")
+    strHtml = `<div class="label">Evolve from:</div><div class="field">${evolves}</div>`;
+  
+    return strHtml;
+}
 const addVarieties = (variet: Array<VarietyPokemon>) => {
   let strHtml = "";
   let o = [];
