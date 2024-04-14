@@ -93,7 +93,7 @@ export const loadPokemons = async (n: number) => {
     const details = (await responseDetail.json()) as any[];
     const pok = Object.assign(new DataPokemon(), details);
 
-    //console.log("ABILITIES", JSON.stringify(details));
+
 
     pokemons.push(
       new PokemonDetail(

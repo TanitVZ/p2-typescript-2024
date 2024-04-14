@@ -10,7 +10,7 @@ const renderPokemons = (pokemons: Array<Pokemon>) => {
     html += `<div><img src="${pokemon.photo}" title="Photo of ${pokemon.name}"></div>`;
     html += `<div class="data">`;
     html += `<div class="name"><a href="#" onClick="window.open('./pokemon_${pokemon.name}.html', 'infoPokemon');">${pokemon.name}</a></div>`;
-    html += `<div class="types">${pokemon.typePok.toString()}</div>`;
+    html += `<div class="types">${pokemon.typePok.join("-")}</div>`;
     html += `</div>`;
     html += `</div>`;
   }
@@ -28,12 +28,17 @@ const renderPokemonDetail = (pokemon: PokemonDetail) => {
   html += `<div class="info">`;
   html += `<div><img src="${urlImgPok}${pokemon.name}.jpg" title="Photo of ${pokemon.name}"></div>`;
   html += `<div class="basic">`;
-  html += `<div class="label">Height:</div><div class="field">${pokemon.height}m</div>`;
-  html += `<div class="label">Weight:</div><div class="field">${pokemon.weight}Kg</div>`;
-  html += `<div class="label">Abilities:</div><div class="field">${pokemon.abilities.toString()}</div>`;
+  html += `<div class="label">Height:</div><div class="measure">${pokemon.height} m</div>`;
+  html += `<div class="label">Weight:</div><div class="measure">${pokemon.weight} Kg</div>`;
+  html += `<div class="label">Abilities:</div><div class="field">${pokemon.abilities.join(
+    ", "
+  )}</div>`;
   html += `</div>`;
   html += `</div>`;
-  html += `<div class="label">Moves:</div><div class="field">${pokemon.moves.toString()}</div>`;
+  html += `<div class="label">Moves:</div><div class="field">${addMoves(
+    pokemon.moves
+  )}</div>`;
+
   html += `</div>`;
   return html;
 };
@@ -47,6 +52,22 @@ const htmlHead = (title: string) => {
   head += `<title>${title}</title>`;
   return head;
 };
+
+
+const addMoves = (moves: Array<string>) => {
+  let ulElement = `<ul class="columns">`;
+
+  moves.sort();
+
+  for (const m of moves) {
+    ulElement += `<li>${m}</li>`;
+  }
+
+  ulElement += "</ul>";
+
+  return ulElement;
+};
+
 export const render = (pokemons: Array<Pokemon>) => {
   let html = "";
   return `<html>

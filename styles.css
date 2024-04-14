@@ -42,6 +42,15 @@ main {
   padding-top: 1em;
 }
 
+.pokemonDetail .info2{
+
+  display: flex;
+  flex-direction: row;
+  align-items:center ;
+  padding-top: 1em;
+ 
+}
+
 .info .basic {
   display: flex;
   flex-direction: column;
@@ -67,11 +76,16 @@ a {
   color: black;
 }
 
+.measure {
+  padding-left: 0.5em;
+}
 
 .field {
   text-transform: capitalize;
   padding-left: 0.5em;
 }
+
+
 
 .fieldId {
 
@@ -80,6 +94,13 @@ a {
 .label {
 font-weight: bold;
 padding-right: 0.2em;
+
+}
+
+.columns {
+column-count:4;
+column-gap: 6em;
+list-style-type: none;
 
 }
 a:hover {
