@@ -4,7 +4,7 @@ import { loadPokemons } from "./pokemons.js";
 import { error } from "console";
 
 try {
-const pokemons = await loadPokemons(50);
+const pokemons = await loadPokemons(51);
 const html = render(pokemons);
 //console.log(html);
 await writeFile("index.html", html);

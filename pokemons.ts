@@ -5,8 +5,30 @@ export type VarietyPokemon = {
   isDefault?: boolean;
 };
 
+type Ability = {
+  ability: {
+name : string;
+
+  };
+}
+
+type Type = {
+  type: {
+    name : string;
+    
+      };
+}
+
+type Move = {
+  move: {
+    name : string;
+    
+      };
+
+}
+
 export class Pokemon {
-  constructor(public name: string, public photo: string, public typePok: any) {}
+  constructor(public name: string, public photo: string, public typePok: string[]) {}
 }
 
 export class PokemonDetail extends Pokemon {
@@ -15,13 +37,13 @@ export class PokemonDetail extends Pokemon {
     public name: string,
     public urlSpecies: string,
     public photo: string,
-    public typePok: any,
+    public typePok: string[],
     public height: number,
     public weight: number,
-    public abilities: any,
-    public moves: any,
+    public abilities: string[],
+    public moves: string[],
     public habitat: string,
-    public eggs: any,
+    public eggs: string[],
     public evolvesFrom: string,
     public varieties: VarietyPokemon[]
   ) {
@@ -34,13 +56,13 @@ export class PokemonDetail extends Pokemon {
 class DataPokemon {
   id!: number;
   name!: string;
-  species!: any;
+  species!: {url: string};
   height!: number;
   weight!: number;
-  sprites!: any;
-  types!: any;
-  abilities!: any;
-  moves!: any;
+  sprites!: {front_default: string};
+  types!: Type[];
+  abilities!: Ability[];
+  moves!: Move[];
 
   getId() {
     return this.id;
@@ -54,17 +76,17 @@ class DataPokemon {
   }
 
   getPhoto() {
-    return this.sprites["front_default"];
+    return this.sprites.front_default;
   }
 
   getUrlSpecies() {
-    return this.species["url"];
+    return this.species.url;
   }
 
   getTypes() {
     let a = [];
     for (const t of this.types) {
-      a.push(t["type"]["name"]);
+      a.push(t.type.name);
     }
 
     return a;
@@ -73,7 +95,7 @@ class DataPokemon {
   getAbilities() {
     let a = [];
     for (const t of this.abilities) {
-      a.push(t["ability"]["name"]);
+        a.push(t.ability.name);
     }
 
     return a;
@@ -82,7 +104,7 @@ class DataPokemon {
   getMoves() {
     let a = [];
     for (const t of this.moves) {
-      a.push(t["move"]["name"]);
+      a.push(t.move.name);
     }
 
     return a;
@@ -91,19 +113,19 @@ class DataPokemon {
 
 class SpeciesPokemon {
   name!: string;
-  habitat!: any;
-  egg_groups!: any;
-  evolves_from_species!: any;
-  varieties!: any;
+  habitat!: {name : string};
+  egg_groups!: {name : string}[];
+  evolves_from_species!: {name : string};
+  varieties!: VarietyPokemon[];
 
   getHabitat() {
-    return this.habitat["name"];
+    return this.habitat.name;
   }
 
   getEggGroups() {
     let a = [];
     for (const e of this.egg_groups) {
-      a.push(e["name"]);
+      a.push(e.name);
     }
 
     return a;
@@ -114,7 +136,7 @@ class SpeciesPokemon {
       this.evolves_from_species !== null &&
       typeof this.evolves_from_species === "object"
     )
-      return this.evolves_from_species["name"];
+      return this.evolves_from_species.name;
     else return "";
   }
 
@@ -123,8 +145,8 @@ class SpeciesPokemon {
    
     for (const v of this.varieties) {
       let a: VarietyPokemon = {};
-      a.name = v.pokemon["name"];   
-      a.isDefault = v["is_default"];
+      a.name = v.name;   
+      a.isDefault = v.isDefault;
     
       variety.push(a);
     }

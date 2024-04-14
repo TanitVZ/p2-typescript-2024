@@ -6,7 +6,9 @@ import { VarietyPokemon } from "./pokemons.js";
 const renderPokemons = (pokemons: Array<Pokemon>) => {
   let html = "";
   html += `<h1>Pokemon List</h1>`;
+  html += `<div class="columns col-3">`;
   for (const pokemon of pokemons) {
+  
     html += `<div class="pokemon">`;
     html += `<div><img src="${pokemon.photo}" title="Photo of ${pokemon.name}"></div>`;
     html += `<div class="data">`;
@@ -15,7 +17,7 @@ const renderPokemons = (pokemons: Array<Pokemon>) => {
     html += `</div>`;
     html += `</div>`;
   }
-
+  html += `</div>`;
   return html;
 };
 
@@ -29,22 +31,23 @@ const renderPokemonDetail = (pokemon: PokemonDetail) => {
   html += `<div class="info">`;
   html += `<div><img src="${urlImgPok}${pokemon.name}.jpg" title="Photo of ${pokemon.name}"></div>`;
   html += `<div class="basic">`;
-  html += `<div class="label">Height:</div><div class="measure">${pokemon.height} m</div>`;
-  html += `<div class="label">Weight:</div><div class="measure">${pokemon.weight} Kg</div>`;
-  html += `<div class="label">Abilities:</div><div class="field">${pokemon.abilities.join(
+  html += `<div class="label">Height</div><div class="measure">${pokemon.height} m</div>`;
+  html += `<div class="label">Weight</div><div class="measure">${pokemon.weight} Kg</div>`;
+  html += `<div class="label">Abilities</div><div class="field">${pokemon.abilities.join(
     ", "
   )}</div>`;
   html += `</div>`;
   html += `</div>`;
-  html += `<div class="label">Habitat:</div><div class="field">${pokemon.habitat}</div>`;
-  html += `${addVarieties(
-    pokemon.varieties
-  )}`;
-  html += `${addEvolvesFrom(pokemon.evolvesFrom)}`;
-  html += `<div class="label">Eggs:</div><div class="field">${pokemon.eggs.join(", ")}</div>`;
-  html += `<div class="label">Moves:</div><div class="field">${addMoves(
-    pokemon.moves
+  html += `<div class="label">Habitat</div><div class="field">${pokemon.habitat}</div>`;
+  html += `<div class="label">Eggs</div><div class="field">${pokemon.eggs.join(
+    ", "
   )}</div>`;
+
+  html += `${addEvolvesFrom(pokemon.evolvesFrom)}`;
+  html += `${addVarieties(pokemon.varieties)}`;
+  html += `<div class="label">Moves</div>${addMoves(
+    pokemon.moves
+  )}`;
 
   html += `</div>`;
   return html;
@@ -59,31 +62,30 @@ const htmlHead = (title: string) => {
   head += `<title>${title}</title>`;
   return head;
 };
-const addEvolvesFrom = (evolves : string) => {
+const addEvolvesFrom = (evolves: string) => {
   let strHtml = "";
   console.log(evolves);
   if (evolves !== "")
     strHtml = `<div class="label">Evolve from:</div><div class="field">${evolves}</div>`;
-  
-    return strHtml;
-}
+
+  return strHtml;
+};
 const addVarieties = (variet: Array<VarietyPokemon>) => {
   let strHtml = "";
   let o = [];
- // console.log(variet);
+  // console.log(variet);
   if (variet.length > 0) {
     for (const v of variet) {
-    o.push(v.name);
-  }
-  strHtml = `<div class="label">Varieties:</div><div class="field">${o.join(", ")}</div>`;
-
-}
-  else 
-    strHtml = "";
+      o.push(v.name);
+    }
+    strHtml = `<div class="label">Varieties:</div><div class="field">${o.join(
+      ", "
+    )}</div>`;
+  } else strHtml = "";
   return strHtml;
 };
 const addMoves = (moves: Array<string>) => {
-  let ulElement = `<ul class="columns">`;
+  let ulElement = `<ul class="columns col-4">`;
 
   moves.sort();
 

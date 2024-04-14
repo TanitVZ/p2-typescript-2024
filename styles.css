@@ -1,5 +1,5 @@
 body {
-  font: 500 1rem / 1.625rem "Barlow", sans-serif;
+  font: 500 1em / 1.625rem "Barlow", sans-serif;
 
   overflow: auto;
 }
@@ -94,14 +94,28 @@ a {
 .label {
 font-weight: bold;
 padding-right: 0.2em;
+padding-bottom: 0.2em;
+padding-top: 0.2em;
 
 }
 
 .columns {
-column-count:4;
+
 column-gap: 6em;
 list-style-type: none;
+text-transform: capitalize;
+padding-left:0.5em;
 
+
+}
+.col-3 {
+
+  column-count:3;
+}
+
+.col-4 {
+
+  column-count:4;
 }
 a:hover {
   color: grey;
