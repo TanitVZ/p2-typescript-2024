@@ -14,7 +14,6 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
-  
 }
 
 .pokemon .name {
@@ -26,48 +25,38 @@ main {
   font-variant: small-caps;
 }
 
-
 .pokemonDetail {
   display: flex;
   flex-direction: column;
-
-  
 }
 
-.pokemonDetail .info{
-
+.pokemonDetail .info {
   display: flex;
   flex-direction: row;
-  align-items:center ;
+  align-items: center;
   padding-top: 1em;
 }
 
-.pokemonDetail .info2{
-
+.pokemonDetail .info2 {
   display: flex;
   flex-direction: row;
-  align-items:center ;
+  align-items: center;
   padding-top: 1em;
- 
 }
 
 .info .basic {
   display: flex;
   flex-direction: column;
   padding-left: 1.5em;
-  
 }
 
 .pokemonDetail img {
-
-  width : 10em;
+  width: 10em;
   height: 10em;
-
 }
 .pokemonDetail .name {
-
   font-size: large;
-  text-transform:uppercase;
+  text-transform: uppercase;
   font-weight: bold;
 }
 a {
@@ -85,37 +74,28 @@ a {
   padding-left: 0.5em;
 }
 
-
-
 .fieldId {
-
   display: none;
 }
 .label {
-font-weight: bold;
-padding-right: 0.2em;
-padding-bottom: 0.2em;
-padding-top: 0.2em;
-
+  font-weight: bold;
+  padding-right: 0.2em;
+  padding-bottom: 0.2em;
+  padding-top: 0.2em;
 }
 
 .columns {
-
-column-gap: 6em;
-list-style-type: none;
-text-transform: capitalize;
-padding-left:0.5em;
-
-
+  column-gap: 6em;
+  list-style-type: none;
+  text-transform: capitalize;
+  padding-left: 0.5em;
 }
 .col-3 {
-
-  column-count:3;
+  column-count: 3;
 }
 
 .col-4 {
-
-  column-count:4;
+  column-count: 4;
 }
 a:hover {
   color: grey;

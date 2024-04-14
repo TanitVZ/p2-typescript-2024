@@ -8,7 +8,6 @@ const renderPokemons = (pokemons: Array<Pokemon>) => {
   html += `<h1>Pokemon List</h1>`;
   html += `<div class="columns col-3">`;
   for (const pokemon of pokemons) {
-  
     html += `<div class="pokemon">`;
     html += `<div><img src="${pokemon.photo}" title="Photo of ${pokemon.name}"></div>`;
     html += `<div class="data">`;
@@ -45,9 +44,7 @@ const renderPokemonDetail = (pokemon: PokemonDetail) => {
 
   html += `${addEvolvesFrom(pokemon.evolvesFrom)}`;
   html += `${addVarieties(pokemon.varieties)}`;
-  html += `<div class="label">Moves</div>${addMoves(
-    pokemon.moves
-  )}`;
+  html += `<div class="label">Moves</div>${addMoves(pokemon.moves)}`;
 
   html += `</div>`;
   return html;

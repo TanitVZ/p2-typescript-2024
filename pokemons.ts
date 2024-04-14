@@ -7,28 +7,28 @@ export type VarietyPokemon = {
 
 type Ability = {
   ability: {
-name : string;
-
+    name: string;
   };
-}
+};
 
 type Type = {
   type: {
-    name : string;
-    
-      };
-}
+    name: string;
+  };
+};
 
 type Move = {
   move: {
-    name : string;
-    
-      };
-
-}
+    name: string;
+  };
+};
 
 export class Pokemon {
-  constructor(public name: string, public photo: string, public typePok: string[]) {}
+  constructor(
+    public name: string,
+    public photo: string,
+    public typePok: string[]
+  ) {}
 }
 
 export class PokemonDetail extends Pokemon {
@@ -56,10 +56,10 @@ export class PokemonDetail extends Pokemon {
 class DataPokemon {
   id!: number;
   name!: string;
-  species!: {url: string};
+  species!: { url: string };
   height!: number;
   weight!: number;
-  sprites!: {front_default: string};
+  sprites!: { front_default: string };
   types!: Type[];
   abilities!: Ability[];
   moves!: Move[];
@@ -95,7 +95,7 @@ class DataPokemon {
   getAbilities() {
     let a = [];
     for (const t of this.abilities) {
-        a.push(t.ability.name);
+      a.push(t.ability.name);
     }
 
     return a;
@@ -113,9 +113,9 @@ class DataPokemon {
 
 class SpeciesPokemon {
   name!: string;
-  habitat!: {name : string};
-  egg_groups!: {name : string}[];
-  evolves_from_species!: {name : string};
+  habitat!: { name: string };
+  egg_groups!: { name: string }[];
+  evolves_from_species!: { name: string };
   varieties!: VarietyPokemon[];
 
   getHabitat() {
@@ -142,12 +142,12 @@ class SpeciesPokemon {
 
   getVarieties() {
     let variety: VarietyPokemon[] = [];
-   
+
     for (const v of this.varieties) {
       let a: VarietyPokemon = {};
-      a.name = v.name;   
+      a.name = v.name;
       a.isDefault = v.isDefault;
-    
+
       variety.push(a);
     }
     const varietyOnly = variety.filter((o) => o.isDefault === false);
@@ -161,14 +161,10 @@ export const loadPokemons = async (n: number) => {
 
   const pokemons: Array<PokemonDetail> = [];
   for (const { name, url } of results) {
-  
-
     const responseDetail = await fetch(`${url}`);
     const details = (await responseDetail.json()) as any[];
 
-
     const pok = Object.assign(new DataPokemon(), details);
-
 
     const responseSpecies = await fetch(`${pok.getUrlSpecies()}`);
     const species = (await responseSpecies.json()) as any[];
