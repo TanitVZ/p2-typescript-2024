@@ -1,6 +1,7 @@
 import { writeFile } from "fs/promises";
 import { Pokemon } from "./pokemons.js";
 import { PokemonDetail } from "./pokemons.js";
+import { VarietyPokemon } from "./pokemons.js";
 
 const renderPokemons = (pokemons: Array<Pokemon>) => {
   let html = "";
@@ -35,6 +36,10 @@ const renderPokemonDetail = (pokemon: PokemonDetail) => {
   )}</div>`;
   html += `</div>`;
   html += `</div>`;
+  html += `<div class="label">Habitat:</div><div class="field">${pokemon.habitat}</div>`;
+  html += `${addVarieties(
+    pokemon.varieties
+  )}</div>`;
   html += `<div class="label">Moves:</div><div class="field">${addMoves(
     pokemon.moves
   )}</div>`;
@@ -53,7 +58,21 @@ const htmlHead = (title: string) => {
   return head;
 };
 
+const addVarieties = (variet: Array<VarietyPokemon>) => {
+  let strHtml = "";
+  let o = [];
+ // console.log(variet);
+  if (variet.length > 0) {
+    for (const v of variet) {
+    o.push(v.name);
+  }
+  strHtml = `<div class="label">Varieties:</div><div class="field">${o.join(", ")}</div>`;
 
+}
+  else 
+    strHtml = "";
+  return strHtml;
+};
 const addMoves = (moves: Array<string>) => {
   let ulElement = `<ul class="columns">`;
 
