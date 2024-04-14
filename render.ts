@@ -6,29 +6,39 @@ const renderPokemons = (pokemons: Array<Pokemon>) => {
   let html = "";
   html += `<h1>Pokemon List</h1>`;
   for (const pokemon of pokemons) {
-    html += `<div class="pokemon">`
-    html += `<div><img src="${pokemon.photo}" title="Photo of ${pokemon.name}"</div>`;
+    html += `<div class="pokemon">`;
+    html += `<div><img src="${pokemon.photo}" title="Photo of ${pokemon.name}"></div>`;
+    html += `<div class="data">`;
     html += `<div class="name"><a href="#" onClick="window.open('./pokemon_${pokemon.name}.html', 'infoPokemon');">${pokemon.name}</a></div>`;
-    html += `<div>${pokemon.typePok.toString()}</div>`;
-   
+    html += `<div class="types">${pokemon.typePok.toString()}</div>`;
+    html += `</div>`;
+    html += `</div>`;
   }
 
   return html;
 };
 
 const renderPokemonDetail = (pokemon: PokemonDetail) => {
-  console.log("render pok detail 1");
+  //console.log("render pok detail 1");
+  const urlImgPok = "https://img.pokemondb.net/artwork/";
   let html = "";
-  html += `<div>${pokemon.name}</div>`;
-  html += `<div>Height:${pokemon.height}</div>`;
-  html += `<div>Weight:${pokemon.weight}</div>`;
-  html += `<div>Abilities:${pokemon.abilities.toString()}</div>`;
-  html += `<div>Moves:${pokemon.moves.toString()}</div>`;
-
+  html += `<div class="pokemonDetail">`;
+  html += `<div class="name">${pokemon.name}</div>`;
+  html += `<div class="fieldId">${pokemon.id}</div>`;
+  html += `<div class="info">`;
+  html += `<div><img src="${urlImgPok}${pokemon.name}.jpg" title="Photo of ${pokemon.name}"></div>`;
+  html += `<div class="basic">`;
+  html += `<div class="label">Height:</div><div class="field">${pokemon.height}m</div>`;
+  html += `<div class="label">Weight:</div><div class="field">${pokemon.weight}Kg</div>`;
+  html += `<div class="label">Abilities:</div><div class="field">${pokemon.abilities.toString()}</div>`;
+  html += `</div>`;
+  html += `</div>`;
+  html += `<div class="label">Moves:</div><div class="field">${pokemon.moves.toString()}</div>`;
+  html += `</div>`;
   return html;
 };
 
-const htmlHead = (title : string) => {
+const htmlHead = (title: string) => {
   let head = "";
 
   head += `<meta charset="UTF-8" />`;
@@ -54,8 +64,7 @@ export const render = (pokemons: Array<Pokemon>) => {
 export const renderPokemon = (pokemonDetail: PokemonDetail) => {
   let html = "";
 
-  return `<html>(
-    
+  return `<html>   
       <body>
       <head>
         ${htmlHead(pokemonDetail.name)}

@@ -11,6 +11,7 @@ export class Pokemon {
 
 export class PokemonDetail extends Pokemon {
   constructor(
+    public id: number,
     public name: string,
     public photo: string,
     public typePok: any,
@@ -20,12 +21,13 @@ export class PokemonDetail extends Pokemon {
     public moves: any
   ) {
     super(name, photo, typePok);
-    this.height = height;
-    this.weight = weight;
+    // this.height = height;
+    // this.weight = weight;
   }
 }
 
 class DataPokemon {
+  id!: number;
   name!: string;
   height!: number;
   weight!: number;
@@ -34,12 +36,16 @@ class DataPokemon {
   abilities!: any;
   moves!: any;
 
+  getId() {
+    return this.id;
+  }
   getHeight() {
-    return this.height;
+    
+    return this.height/10;
   }
 
   getWeight() {
-    return this.weight;
+    return this.weight/10;
   }
 
   getPhoto() {
@@ -91,6 +97,7 @@ export const loadPokemons = async (n: number) => {
 
     pokemons.push(
       new PokemonDetail(
+        pok.getId(),
         name,
         pok.getPhoto(),
         pok.getTypes(),

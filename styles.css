@@ -13,6 +13,7 @@ main {
 .pokemon {
   display: flex;
   flex-direction: row;
+  align-items: center;
   
 }
 
@@ -20,12 +21,67 @@ main {
   text-transform: capitalize;
 }
 
+.pokemon .types {
+  text-transform: capitalize;
+  font-variant: small-caps;
+}
+
+
+.pokemonDetail {
+  display: flex;
+  flex-direction: column;
+
+  
+}
+
+.pokemonDetail .info{
+
+  display: flex;
+  flex-direction: row;
+  align-items:center ;
+  padding-top: 1em;
+}
+
+.info .basic {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5em;
+  
+}
+
+.pokemonDetail img {
+
+  width : 10em;
+  height: 10em;
+
+}
+.pokemonDetail .name {
+
+  font-size: large;
+  text-transform:uppercase;
+  font-weight: bold;
+}
 a {
   font-weight: bold;
   text-decoration: none;
   color: black;
 }
 
+
+.field {
+  text-transform: capitalize;
+  padding-left: 0.5em;
+}
+
+.fieldId {
+
+  display: none;
+}
+.label {
+font-weight: bold;
+padding-right: 0.2em;
+
+}
 a:hover {
   color: grey;
   cursor: pointer;
